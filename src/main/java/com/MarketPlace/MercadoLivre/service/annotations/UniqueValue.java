@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Target({ElementType.FIELD})
 @Constraint(validatedBy = {UniqueValueValidator.class})
 public @interface UniqueValue {
     String message() default "Campo deve ser único";

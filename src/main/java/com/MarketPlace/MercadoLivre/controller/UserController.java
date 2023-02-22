@@ -5,7 +5,6 @@ import com.MarketPlace.MercadoLivre.model.request.NewUserRequest;
 import com.MarketPlace.MercadoLivre.service.NewUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,7 @@ public class UserController {
     private NewUserService service;
 
     @PostMapping(value = "/users")
-    public String createUser (@RequestBody @Valid NewUserRequest request) {
+    public String createUser(@RequestBody @Valid NewUserRequest request) {
         NewUser user = request.toModel();
         service.createUser(user);
         return user.toString();
