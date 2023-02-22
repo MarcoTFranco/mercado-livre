@@ -40,6 +40,10 @@ public class NewUser {
         this.instantOfCadastre = LocalDate.now();
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     @Override
     public String toString() {
         return "NewUser{" +
