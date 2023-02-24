@@ -1,9 +1,10 @@
 package com.MarketPlace.MercadoLivre.repository;
 
-import com.MarketPlace.MercadoLivre.model.entities.NewUser;
+import com.MarketPlace.MercadoLivre.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<NewUser, Long> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 }

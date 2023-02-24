@@ -20,7 +20,7 @@ public class CategoryController {
     @PersistenceContext
     private EntityManager manager;
 
-    @PostMapping(value = "/categories")
+    @PostMapping(value = "/api/categories")
     public String createCategory (@RequestBody @Valid CategoryRequest request) {
         Category category = request.toModel(manager);
         service.createCategory(category);

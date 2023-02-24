@@ -1,11 +1,12 @@
 package com.MarketPlace.MercadoLivre.model.entities;
 
+import com.MarketPlace.MercadoLivre.model.request.UserRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class NewUserTest {
+class UserLoggedTest {
 
     @DisplayName("so aceita senha com 6 ou mais caracteres")
     @ParameterizedTest
@@ -13,7 +14,7 @@ class NewUserTest {
             "123456", "1234567", "1234564872121"
     })
     void test1(String password) throws Exception {
-        NewUser user = new NewUser("user@gmail.com", password);
+        UserRequest userRequest = new UserRequest("user@gmail.com", password);
     }
 
     @DisplayName("nao aceita senha com menos de 6 caracteres")
@@ -23,7 +24,7 @@ class NewUserTest {
     })
     void test2(String password) throws Exception {
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new NewUser("user@gmail.com", password));
+                () -> new UserRequest("user@gmail.com", password));
     }
 
 }

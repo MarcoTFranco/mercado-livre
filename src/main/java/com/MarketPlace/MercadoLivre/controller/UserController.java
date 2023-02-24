@@ -1,25 +1,37 @@
 package com.MarketPlace.MercadoLivre.controller;
 
-import com.MarketPlace.MercadoLivre.model.entities.NewUser;
-import com.MarketPlace.MercadoLivre.model.request.NewUserRequest;
-import com.MarketPlace.MercadoLivre.service.NewUserService;
+import com.MarketPlace.MercadoLivre.model.entities.User;
+import com.MarketPlace.MercadoLivre.model.request.UserRequest;
+import com.MarketPlace.MercadoLivre.service.UserService;
+import com.MarketPlace.MercadoLivre.service.security.auth.AuthenticationRequest;
+import com.MarketPlace.MercadoLivre.service.security.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController()
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private NewUserService service;
+    private UserService service;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    @PostMapping(value = "/users")
-    public String createUser(@RequestBody @Valid NewUserRequest request) {
-        NewUser user = request.toModel();
+
+    @PostMapping("/new")
+    public String createUser(@RequestBody @Valid UserRequest request) {
+        User user = request.toModel();
         service.createUser(user);
         return user.toString();
+    }
+
+    @PostMapping("/authenticate")
+    public String authenticate(@RequestBody AuthenticationRequest request) {
+        return authenticationService.authenticate(request);
     }
 
 }
