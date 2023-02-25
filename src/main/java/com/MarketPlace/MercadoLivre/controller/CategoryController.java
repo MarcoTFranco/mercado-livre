@@ -9,9 +9,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
 
     @Autowired
@@ -20,8 +22,8 @@ public class CategoryController {
     @PersistenceContext
     private EntityManager manager;
 
-    @PostMapping(value = "/api/categories")
-    public String createCategory (@RequestBody @Valid CategoryRequest request) {
+    @PostMapping(value = "/categories")
+    public String createCategory(@RequestBody @Valid CategoryRequest request) {
         Category category = request.toModel(manager);
         service.createCategory(category);
         return category.toString();

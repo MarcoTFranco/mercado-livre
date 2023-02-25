@@ -9,13 +9,14 @@ import org.hibernate.validator.constraints.Length;
 public class UserRequest {
     @Email
     @NotBlank
-    @UniqueValue (fieldName = "email", domainClass = User.class)
+    @UniqueValue(fieldName = "email", domainClass = User.class)
     private String email;
     @Length(min = 6)
     @NotBlank
     private String password;
+
     @Deprecated
-    public UserRequest(){
+    public UserRequest() {
     }
 
     public UserRequest(@Email @NotBlank String email, @Length(min = 6) @NotBlank String password) {
