@@ -1,6 +1,5 @@
 package com.MarketPlace.MercadoLivre.service.security.auth;
 
-import com.MarketPlace.MercadoLivre.model.entities.UserLogged;
 import com.MarketPlace.MercadoLivre.model.enums.Role;
 import com.MarketPlace.MercadoLivre.repository.UserRepository;
 import com.MarketPlace.MercadoLivre.service.security.config.JwtService;

@@ -36,7 +36,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", category=" + categoryMother +
+                ", categoryMother=" + categoryMother +
                 '}';
     }
 }

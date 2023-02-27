@@ -38,10 +38,13 @@ public class Product {
     @ManyToOne
     private User owner;
 
-    @ElementCollection
+
     @Size(min = 3)
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
-    private Set<Feature> features = new HashSet<>();
+    private Set<ProductFeature> productFeatures = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private Set<ProductImage> productImages = new HashSet<>();
 
     @Deprecated
     public Product() {
@@ -50,8 +53,8 @@ public class Product {
     public Product(@NotBlank String name, @Positive BigDecimal value,
                    @PositiveOrZero Integer amountAvailable,
                    @Size(max = 1000) String description, @NotNull Category category,
-                   @Size(min = 3) Collection<FeaturesRequest> features,
-                   @NotNull User owner) {
+                   @NotNull User owner,
+                   @Size(min = 3) Collection<FeaturesRequest> features) {
 
         this.name = name;
         this.value = value;
@@ -60,26 +63,19 @@ public class Product {
         this.category = category;
         this.owner = owner;
         this.instantOfCreation = LocalDate.now();
-        this.features.addAll(features.stream()
+        this.productFeatures.addAll(features.stream()
                 .map(feature -> feature.toModel(this))
                 .collect(Collectors.toSet()));
-        Assert.isTrue(this.features.size() >= 3,
+
+        Assert.isTrue(this.productFeatures.size() >= 3,
                 "Todo produto dever ter no minimo 3 carateristicas");
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", value=" + value +
-                ", amountAvailable=" + amountAvailable +
-                ", description='" + description + '\'' +
-                ", instantOfCreation=" + instantOfCreation +
-                ", category=" + category +
-                ", owner=" + owner +
-                ", productFeatures=" + features +
-                '}';
+    public void associatesImages(Set<String> links) {
+        Set<ProductImage> images = links.stream()
+                .map(link -> new ProductImage(this, link))
+                .collect(Collectors.toSet());
+        this.productImages.addAll(images);
     }
 
     @Override
@@ -93,5 +89,21 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value=" + value +
+                ", amountAvailable=" + amountAvailable +
+                ", description='" + description + '\'' +
+                ", instantOfCreation=" + instantOfCreation +
+                ", category=" + category +
+                ", owner=" + owner +
+                ", productFeatures=" + productFeatures +
+                ", productImages=" + productImages +
+                '}';
     }
 }

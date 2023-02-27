@@ -35,7 +35,8 @@ public class ProductRequest {
 
     public ProductRequest(@NotBlank String name, @Positive BigDecimal value,
                           @PositiveOrZero Integer amountAvailable,
-                          @Size(max = 1000) String description, @NotNull Long categoryId,
+                          @Size(max = 1000) String description,
+                          @NotNull Long categoryId,
                           @Size(min = 3) List<FeaturesRequest> features) {
         this.name = name;
         this.value = value;
@@ -69,11 +70,12 @@ public class ProductRequest {
         return features;
     }
 
+
     public Product toModel(EntityManager manager, User owner) {
         Category category = manager.find(Category.class, categoryId);
         Assert.isTrue(category != null, "Um produto deve ter uma categoria");
 
-        return new Product(name, value, amountAvailable, description, category, features, owner);
+        return new Product(name, value, amountAvailable, description, category, owner, features);
     }
 
     public Set<String> haveCharacteristicEqual() {

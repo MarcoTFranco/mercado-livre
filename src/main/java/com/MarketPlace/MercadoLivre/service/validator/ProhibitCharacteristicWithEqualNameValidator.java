@@ -23,7 +23,8 @@ public class ProhibitCharacteristicWithEqualNameValidator implements Validator {
         ProductRequest request = (ProductRequest) target;
         Set<String> equalName = request.haveCharacteristicEqual();
         if (!equalName.isEmpty()) {
-            errors.reject("features", null, "Você tem caracteristicas iguais" + equalName);
+            errors.rejectValue("features", null,
+                    "Você tem caracteristicas iguais" + equalName);
         }
 
     }

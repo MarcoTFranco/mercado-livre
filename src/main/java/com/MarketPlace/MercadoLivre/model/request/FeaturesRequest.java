@@ -1,7 +1,7 @@
 package com.MarketPlace.MercadoLivre.model.request;
 
-import com.MarketPlace.MercadoLivre.model.entities.Feature;
 import com.MarketPlace.MercadoLivre.model.entities.Product;
+import com.MarketPlace.MercadoLivre.model.entities.ProductFeature;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,7 +38,7 @@ public class FeaturesRequest {
         this.description = description;
     }
 
-    public Feature toModel(@NotNull @Valid Product product) {
-        return new Feature(name, description, product);
+    public ProductFeature toModel(@NotNull @Valid Product product) {
+        return new ProductFeature(name, description, product);
     }
 }

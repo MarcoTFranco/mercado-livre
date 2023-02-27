@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class UserLoggedTest {
+class UserTest {
 
     @DisplayName("so aceita senha com 6 ou mais caracteres")
     @ParameterizedTest
@@ -14,7 +14,7 @@ class UserLoggedTest {
             "123456", "1234567", "1234564872121"
     })
     void test1(String password) throws Exception {
-        UserRequest userRequest = new UserRequest("user@gmail.com", password);
+        User userRequest = new User("user@gmail.com", password);
     }
 
     @DisplayName("nao aceita senha com menos de 6 caracteres")
@@ -24,7 +24,7 @@ class UserLoggedTest {
     })
     void test2(String password) throws Exception {
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new UserRequest("user@gmail.com", password));
+                () -> new User("user@gmail.com", password));
     }
 
 }
