@@ -21,7 +21,7 @@ public class ImageRequest {
     public ImageRequest() {
     }
 
-    public ImageRequest( @Size(min = 1) @NotNull List<MultipartFile> images) {
+    public ImageRequest(@NotNull List<MultipartFile> images) {
         this.images = images;
     }
 

@@ -1,7 +1,8 @@
 package com.MarketPlace.MercadoLivre.service.security.auth;
 
 import com.MarketPlace.MercadoLivre.model.entities.User;
-import com.MarketPlace.MercadoLivre.model.enums.Role;
+import com.MarketPlace.MercadoLivre.model.util.enums.Role;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

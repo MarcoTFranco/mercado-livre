@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
@@ -27,9 +28,10 @@ public class User {
     private String password;
     @NotNull
     private LocalDate instantOfCadastre;
-    @OneToMany
-    @JsonIgnore
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
     private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
+    private List<ProductOpinion> opinions = new ArrayList<>();
 
     @Deprecated
     public User() {
@@ -71,6 +73,23 @@ public class User {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public List<ProductOpinion> getOpinions() {
+        return opinions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 
     @Override
