@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class UploaderFake implements Uploader {
-    public Set<String> send(List<MultipartFile> images) {
+    public Set<String> upload(List<MultipartFile> images) {
         return images.stream()
                 .map(image -> "http://bucket.io/"
                         + image.getOriginalFilename())

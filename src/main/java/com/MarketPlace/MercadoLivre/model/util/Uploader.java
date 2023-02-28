@@ -11,5 +11,5 @@ public interface Uploader {
      * @param images Images to be uploaded
      * @return Set containing urls of uploaded files
      */
-    Set<String> send(List<MultipartFile> images);
+    Set<String> upload(List<MultipartFile> images);
 }

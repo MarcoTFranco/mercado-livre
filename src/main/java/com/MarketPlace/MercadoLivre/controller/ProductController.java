@@ -59,7 +59,7 @@ public class ProductController {
             throw new ProductNotBelongUserException("Não tente adicionar imagens a produto que não é seu");
         }
 
-        Set<String> links = uploaderFake.send(request.getImages());
+        Set<String> links = uploaderFake.upload(request.getImages());
         product.associatesImages(links);
         service.update(product);
         return product.toString();
@@ -78,5 +78,4 @@ public class ProductController {
         service.update(product);
         return product.toString();
     }
-
 }

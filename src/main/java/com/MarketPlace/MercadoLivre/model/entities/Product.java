@@ -66,6 +66,10 @@ public class Product {
         Assert.isTrue(this.productFeatures.size() >= 3, "Todo produto dever ter no minimo 3 carateristicas");
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
     public void associatesImages(Set<String> links) {
         Set<ProductImage> images = links.stream().map(link -> new ProductImage(this, link)).collect(Collectors.toSet());
         this.productImages.addAll(images);
