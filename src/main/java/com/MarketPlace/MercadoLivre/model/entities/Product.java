@@ -134,7 +134,23 @@ public class Product {
         for (ProductOpinion productOpinion : productOpinions) {
             notas += productOpinion.getNote();
         }
+
+        if (notas == 0) {
+            return notas;
+        }
+
         return notas / productOpinions.size();
+    }
+
+    public boolean toBePurchasedSlaughterInStock(@Positive Integer amount) {
+        Assert.isTrue(amount > 0, "A quantidade deve ser maior que zero para abater no estoque");
+
+        if (amount <= amountAvailable) {
+            this.amountAvailable -= amount;
+            return true;
+        }
+
+        return false;
     }
 
     @Override
