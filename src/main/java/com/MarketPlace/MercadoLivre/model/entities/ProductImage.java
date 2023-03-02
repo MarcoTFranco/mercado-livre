@@ -29,6 +29,10 @@ public class ProductImage {
         this.product = product;
     }
 
+    public String getLink() {
+        return link;
+    }
+
     @Override
     public String toString() {
         return "ProductImage{" +

@@ -1,5 +1,6 @@
 package com.MarketPlace.MercadoLivre.service;
 
+import com.MarketPlace.MercadoLivre.model.dto.ProductDTO;
 import com.MarketPlace.MercadoLivre.model.entities.Product;
 import com.MarketPlace.MercadoLivre.model.entities.User;
 import com.MarketPlace.MercadoLivre.repository.ProductRepository;
@@ -26,5 +27,9 @@ public class ProductService {
 
     public User findByEmailUser(String email) {
         return userRepository.findByEmail(email).orElseThrow();
+    }
+
+    public Product findById(Long id) {
+        return productRepository.getReferenceById(id);
     }
 }

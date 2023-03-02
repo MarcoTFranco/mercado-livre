@@ -46,6 +46,26 @@ public class ProductOpinion {
         this.owner = owner;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getNote() {
+        return note;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
     @Override
     public String toString() {
         return "ProductOpinion{" +

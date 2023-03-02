@@ -1,6 +1,5 @@
 package com.MarketPlace.MercadoLivre.model.util;
 
-import com.MarketPlace.MercadoLivre.model.util.Uploader;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

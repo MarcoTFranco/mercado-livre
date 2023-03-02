@@ -1,6 +1,7 @@
 package com.MarketPlace.MercadoLivre.controller;
 
 import com.MarketPlace.MercadoLivre.controller.exceptions.ProductNotBelongUserException;
+import com.MarketPlace.MercadoLivre.model.dto.ProductDTO;
 import com.MarketPlace.MercadoLivre.model.entities.Product;
 import com.MarketPlace.MercadoLivre.model.entities.User;
 import com.MarketPlace.MercadoLivre.model.request.ImageRequest;
@@ -13,6 +14,7 @@ import com.MarketPlace.MercadoLivre.service.validator.ProhibitCharacteristicWith
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,7 +38,7 @@ public class ProductController {
         webDataBinder.addValidators(new ProhibitCharacteristicWithEqualNameValidator());
     }
 
-    @RequestMapping("/products")
+    @PostMapping("/products")
     public String createProduct(@RequestBody @Valid ProductRequest request,
                                 @AuthenticationPrincipal UserLogged userLogged) {
         // --- User logado
@@ -47,7 +49,7 @@ public class ProductController {
         return product.toString();
     }
 
-    @RequestMapping("/products/{id}/images")
+    @PostMapping("/products/{id}/images")
     public String addImages(@PathVariable Long id,
                             @Valid ImageRequest request,
                             @AuthenticationPrincipal UserLogged userLogged) {
@@ -65,7 +67,7 @@ public class ProductController {
         return product.toString();
     }
 
-    @RequestMapping("/products/{id}/opinions")
+    @PostMapping("/products/{id}/opinions")
     public String addOpinions(@PathVariable Long id,
                               @RequestBody @Valid OpinionRequest request,
                               @AuthenticationPrincipal UserLogged userLogged) {

@@ -7,9 +7,6 @@ import com.MarketPlace.MercadoLivre.model.util.Mailer;
 import com.MarketPlace.MercadoLivre.repository.DoubtAboutProductRepository;
 import com.MarketPlace.MercadoLivre.repository.UserRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

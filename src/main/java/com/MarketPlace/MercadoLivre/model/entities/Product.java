@@ -41,7 +41,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private Set<ProductImage> productImages = new HashSet<>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
-    private Set<ProductOpinion> productOpinion = new HashSet<>();
+    private Set<ProductOpinion> productOpinions = new HashSet<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private Set<DoubtAboutProduct> productDoubts = new HashSet<>();
 
     @Deprecated
     public Product() {
@@ -66,8 +68,48 @@ public class Product {
         Assert.isTrue(this.productFeatures.size() >= 3, "Todo produto dever ter no minimo 3 carateristicas");
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public Integer getAmountAvailable() {
+        return amountAvailable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getInstantOfCreation() {
+        return instantOfCreation;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     public User getOwner() {
         return owner;
+    }
+
+    public Set<ProductFeature> getProductFeatures() {
+        return productFeatures;
+    }
+
+    public Set<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public Set<ProductOpinion> getProductOpinions() {
+        return productOpinions;
+    }
+
+    public Set<DoubtAboutProduct> getProductDoubts() {
+        return productDoubts;
     }
 
     public void associatesImages(Set<String> links) {
@@ -76,11 +118,23 @@ public class Product {
     }
 
     public void associatesOpinions(OpinionRequest request, User userOpinion) {
-        this.productOpinion.add(request.toModel(this, userOpinion));
+        this.productOpinions.add(request.toModel(this, userOpinion));
+    }
+
+    public void associatesDoubts(DoubtAboutProduct doubtAboutProduct) {
+        this.productDoubts.add(doubtAboutProduct);
     }
 
     public boolean belongsUser(User owner) {
         return this.owner.equals(owner);
+    }
+
+    public Double averangeNotes() {
+        Double notas = 0.0;
+        for (ProductOpinion productOpinion : productOpinions) {
+            notas += productOpinion.getNote();
+        }
+        return notas / productOpinions.size();
     }
 
     @Override
@@ -98,6 +152,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", value=" + value + ", amountAvailable=" + amountAvailable + ", description='" + description + '\'' + ", instantOfCreation=" + instantOfCreation + ", category=" + category + ", owner=" + owner + ", productFeatures=" + productFeatures + ", productImages=" + productImages + ", productOpinion=" + productOpinion + '}';
+        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", value=" + value + ", amountAvailable=" + amountAvailable + ", description='" + description + '\'' + ", instantOfCreation=" + instantOfCreation + ", category=" + category + ", owner=" + owner + ", productFeatures=" + productFeatures + ", productImages=" + productImages + ", productOpinion=" + productOpinions + '}';
     }
 }

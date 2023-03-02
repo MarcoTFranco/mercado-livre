@@ -9,10 +9,7 @@ import com.MarketPlace.MercadoLivre.service.security.auth.UserLogged;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -21,13 +18,14 @@ public class DoubtProductController {
     @Autowired
     private DoubtAboutProductService service;
 
-    @RequestMapping("/products/{id}/doubts")
+    @PostMapping("/products/{id}/doubts")
     public String doubtsAboutTheProduct(@PathVariable Long id,
                                         @RequestBody @Valid DoubtRequest request,
                                         @AuthenticationPrincipal UserLogged userLogged) {
         User userDoubt = service.findByEmailUser(userLogged.getEmail());
         Product product = service.findByIdProduct(id);
         DoubtAboutProduct doubtAboutProduct = request.toModel(userDoubt, product);
+        product.associatesDoubts(doubtAboutProduct);
 
         service.insert(doubtAboutProduct);
         service.newDoubt(doubtAboutProduct);

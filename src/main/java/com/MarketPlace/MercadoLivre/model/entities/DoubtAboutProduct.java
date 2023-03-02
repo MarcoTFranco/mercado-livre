@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+
 @Entity
 @Table(name = "tb_doubtsProduct")
 public class DoubtAboutProduct {
@@ -23,6 +24,10 @@ public class DoubtAboutProduct {
     @ManyToOne
     private Product product;
     private LocalDate instantOfCreation;
+
+    @Deprecated
+    public DoubtAboutProduct() {
+    }
 
     public DoubtAboutProduct(@NotBlank String title,
                              @Valid @NotNull User userDoubt,
