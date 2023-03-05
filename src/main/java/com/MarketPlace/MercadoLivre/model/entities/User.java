@@ -46,6 +46,10 @@ public class User {
         this.instantOfCadastre = LocalDate.now();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getEmail() {
         return email;
     }

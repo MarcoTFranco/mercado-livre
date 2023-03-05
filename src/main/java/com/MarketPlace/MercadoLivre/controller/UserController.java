@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("/new")
     public String createUser(@RequestBody @Valid UserRequest request) {
         User user = request.toModel();
-        service.createUser(user);
+        service.insert(user);
         return user.toString();
     }
 

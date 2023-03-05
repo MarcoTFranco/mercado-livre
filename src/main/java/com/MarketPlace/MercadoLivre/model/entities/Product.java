@@ -63,11 +63,12 @@ public class Product {
         this.category = category;
         this.owner = owner;
         this.instantOfCreation = LocalDate.now();
-        this.productFeatures.addAll(features.stream().map(feature -> feature.toModel(this)).collect(Collectors.toSet()));
+        this.productFeatures.addAll(features.stream()
+                .map(feature -> feature.toModel(this))
+                .collect(Collectors.toSet()));
 
         Assert.isTrue(this.productFeatures.size() >= 3, "Todo produto dever ter no minimo 3 carateristicas");
     }
-
     public String getName() {
         return name;
     }
@@ -142,7 +143,7 @@ public class Product {
         return notas / productOpinions.size();
     }
 
-    public boolean toBePurchasedSlaughterInStock(@Positive Integer amount) {
+    public boolean beatStock(@Positive Integer amount) {
         Assert.isTrue(amount > 0, "A quantidade deve ser maior que zero para abater no estoque");
 
         if (amount <= amountAvailable) {

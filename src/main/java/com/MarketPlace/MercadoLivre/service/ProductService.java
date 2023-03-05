@@ -1,6 +1,5 @@
 package com.MarketPlace.MercadoLivre.service;
 
-import com.MarketPlace.MercadoLivre.model.dto.ProductDTO;
 import com.MarketPlace.MercadoLivre.model.entities.Product;
 import com.MarketPlace.MercadoLivre.model.entities.User;
 import com.MarketPlace.MercadoLivre.repository.ProductRepository;

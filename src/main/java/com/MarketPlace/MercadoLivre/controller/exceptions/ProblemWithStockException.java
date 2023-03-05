@@ -1,4 +1,4 @@
-package com.MarketPlace.MercadoLivre.service.exceptions;
+package com.MarketPlace.MercadoLivre.controller.exceptions;
 
 public class ProblemWithStockException extends RuntimeException{
 

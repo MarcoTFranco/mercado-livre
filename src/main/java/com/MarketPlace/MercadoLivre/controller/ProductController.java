@@ -1,7 +1,6 @@
 package com.MarketPlace.MercadoLivre.controller;
 
 import com.MarketPlace.MercadoLivre.controller.exceptions.ProductNotBelongUserException;
-import com.MarketPlace.MercadoLivre.model.dto.ProductDTO;
 import com.MarketPlace.MercadoLivre.model.entities.Product;
 import com.MarketPlace.MercadoLivre.model.entities.User;
 import com.MarketPlace.MercadoLivre.model.request.ImageRequest;
@@ -14,7 +13,6 @@ import com.MarketPlace.MercadoLivre.service.validator.ProhibitCharacteristicWith
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;

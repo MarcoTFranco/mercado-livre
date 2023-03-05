@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
@@ -60,6 +61,40 @@ class ProductTest {
             new Product("name", BigDecimal.TEN, 10, "description",
                     category, owner, features);
         });
+    }
+
+    @DisplayName("verifica o estoque do produto")
+    @ParameterizedTest
+    @CsvSource({ "1,1,true", "1,2,false", "4,2,true", "1,5,false"})
+    void test3(int stock, int amountRequest, boolean resultExpected) throws Exception {
+        List<FeaturesRequest> features = List.of(
+                new FeaturesRequest("key1", "value1"),
+                new FeaturesRequest("key2", "value2"),
+                new FeaturesRequest("key3", "value3"));
+        Category category = new Category("category");
+        User user = new User("user@gmail.com", "123456");
+        Product product = new Product("name", BigDecimal.TEN,
+                stock, "description", category, user, features);
+
+        boolean result = product.beatStock(amountRequest);
+
+        Assertions.assertEquals(resultExpected, result);
+    }
+
+    @DisplayName("não aceita abater estoque <= zero")
+    @ParameterizedTest
+    @CsvSource({"0", "-1", "-4", "-122"})
+    void test4(int stock) throws Exception {
+        List<FeaturesRequest> features = List.of(
+                new FeaturesRequest("key1", "value1"),
+                new FeaturesRequest("key2", "value2"),
+                new FeaturesRequest("key3", "value3"));
+        Category category = new Category("category");
+        User user = new User("user@gmail.com", "123456");
+        Product product = new Product("name", BigDecimal.TEN,
+                stock, "description", category, user, features);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> product.beatStock(stock));
     }
 
 }

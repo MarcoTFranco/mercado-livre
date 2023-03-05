@@ -10,8 +10,12 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public void createUser(User user) {
+    public void insert(User user) {
         repository.save(user);
+    }
+
+    public User findByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow();
     }
 
 }

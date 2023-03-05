@@ -1,38 +1,45 @@
 package com.MarketPlace.MercadoLivre.service;
 
 import com.MarketPlace.MercadoLivre.model.entities.Payment;
-import com.MarketPlace.MercadoLivre.model.entities.Product;
-import com.MarketPlace.MercadoLivre.model.entities.User;
 import com.MarketPlace.MercadoLivre.model.util.Mailer;
 import com.MarketPlace.MercadoLivre.repository.PaymentRepository;
-import com.MarketPlace.MercadoLivre.repository.ProductRepository;
-import com.MarketPlace.MercadoLivre.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 @Service
 public class PaymentService {
     @Autowired
     private Mailer mailer;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private PaymentRepository paymentRepository;
 
-    public User findByEmailUser(String email) {
-        return userRepository.findByEmail(email).orElseThrow();
-    }
-
-    public Product findByIdProduct(Long id) {
-        return productRepository.findById(id).orElseThrow();
-    }
-
-    public void createPayment(Payment payment) {
+    public void insert(Payment payment) {
         paymentRepository.save(payment);
     }
+
+    public <T> T find(Class<T> classe, Long id) {
+        return entityManager.find(classe, id);
+    }
+
+    public void processTaxNote(Payment payment) {
+        System.out.println("criando taxote ...");
+    }
+
+    public void processRanking(Payment payment) {
+        System.out.println("criando ranking ...");
+    }
+
+    public void processEmail(Payment payment) {
+        System.out.println("criando email ...");
+    }
+
 }
